@@ -28,15 +28,16 @@ Download the latest Public Beta from the Releases section.
 
 ### Version 1.1.0 Beta
 **🚀 New Features:**
-- **On-Device Compiler Agent Engine:** Added zero-human-intervention app generation directly inside the IDE.
-- **Smart Model Routing:** Switched from proxy models to direct gateway to support custom providers like MiniMax and Nemotron.
-- **Agent Pipeline Rewrite:** New multi-step coding agent that uses `[FILE_START]` delimited outputs for immediate execution.
-- **Expanded Model Library:** Integrated MiniMax M2.7, MiniMax M3, Nemotron Free, and Gemini 3.1 Flash Lite.
+- **Termux-Style Terminal Shortcut Bar:** Added a sticky keyboard shortcut bar right below the terminal (ESC, CTRL, ALT, Arrow keys, etc.) for easier CLI navigation on mobile.
+- **Dynamic Port Detection for Web Previews:** The IDE terminal automatically detects local server URLs (e.g., http://127.0.0.1:5000) and instantly converts them into clickable, public Cloud Preview Links.
+- **Advanced Architecture & Secrets Agent:** Upgraded the Architecture Agent to strictly enforce modern app design patterns (MVVM, Repository Pattern) and automatically generate a .env file for secrets mapping when scaffolding new projects.
+- **Smart AI Voice Mode — Plan & Question:** Full-screen voice AI mode powered by Gemini 2.5 Flash Native Audio. The voice model plans, questions, and hands off to the text agent for code generation.
 
 **🐛 Bug Fixes:**
+- **Server File Sync Reliability (HTTP 500 Fix):** Fixed major terminal crashing issues when syncing workspaces to the cloud execution container. Directories and binary files are now correctly filtered out.
+- **Terminal Layout Collapse Bug:** Fixed a bug where the terminal output area would collapse to 0 height inside the scrolling container, making logs invisible. It now maintains a fixed layout while scrolling gracefully.
+- **Build System: kapt → KSP Migration:** Migrated Room's annotation processing from kapt to KSP, fixing incompatibility with AGP 9.2.1 + Gradle 9.4.1.
 - **DPDP Act 2023 Compliance:** Added mandatory Privacy Policy & Parental Consent checkboxes and Account Deletion workflow.
-- **Model Name Truncation:** Fixed chat header UI to prevent model names from overlapping with quota metrics.
-- **File Switch State Loss:** Bound ChatViewModel history per-project rather than per-file to prevent conversation loss during navigation.
 
 ## 🌍 Community
 
