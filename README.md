@@ -62,7 +62,7 @@ Features may change, bugs may occur, and user feedback will directly influence f
 
 ## 👨‍💻 Founder
 
-**Sunny Kumar**
+**Sunny**
 
 Founder of Novus IDE, building a mobile-first development ecosystem that empowers anyone to code, build, and deploy software directly from a smartphone.
 
