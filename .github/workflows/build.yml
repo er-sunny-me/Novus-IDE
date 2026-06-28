@@ -1,0 +1,58 @@
+name: Novus Cloud Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps || true
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build APK (Local Expo Build)
+        run: |
+          if [ -f app.json ] && [ -f package.json ]; then
+            # Fix missing android.package in CI
+            if ! jq -e '.expo.android.package' app.json >/dev/null; then
+              jq '.expo.android.package = "com.novus.app"' app.json > temp.json && mv temp.json app.json
+            fi
+            npx expo prebuild --platform android --clean
+          fi
+          if [ -d android ]; then
+            cd android
+            chmod +x ./gradlew
+            ./gradlew assembleRelease
+          else
+            echo "No android directory found!"
+            exit 1
+          fi
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/*.apk
